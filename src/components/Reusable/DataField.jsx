@@ -24,7 +24,7 @@ const DateField = ({ setFieldValue, field, form: { touched, errors }, ...props }
           onChange={changeValue}
           error={errors[field.name] && touched[field.name]}
           onClose={onBlurCalender}
-          ref={(...ref) => console.log(ref)}
+        // ref={(...ref) => console.log(ref)}
         />
       </MuiPickersUtilsProvider>
       <div className="h-16 text-error">
