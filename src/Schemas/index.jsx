@@ -24,7 +24,21 @@ export default class Schema {
       startDate: Yup.string()
         .required('This Field Is Required'),
       endDate: Yup.string()
-        .required('This Field Is Required')
+        .required('This Field Is Required'),
+      favItem: Yup.object({
+        Chicken: Yup.boolean(),
+        Mutton: Yup.boolean(),
+        Fish: Yup.boolean(),
+        Egg: Yup.boolean(),
+      }).
+        test(
+          'required',
+          'You need to choose One',
+          async function (values) {
+            console.log(values);
+            return Object.values(values).includes(true);
+          }
+        )
 
 
 

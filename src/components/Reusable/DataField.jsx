@@ -14,7 +14,6 @@ const DateField = ({ setFieldValue, field, form: { touched, errors }, ...props }
   const onBlurCalender = (e) => {
   }
 
-  console.log(fieldRef);
   return (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>

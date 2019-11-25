@@ -21,6 +21,7 @@ import InputField from './Reusable/InputField';
 import DateField from './Reusable/DataField';
 //Schema
 import Schema from '../Schemas';
+import checkBox from './Reusable/checkBox';
 const SignUpSchema = new Schema().getSchema();
 
 
@@ -48,6 +49,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
+  margin: {
+    marginTop: '10px',
+    marginBottom: '10px'
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -60,16 +65,12 @@ export default () => {
       : isoCode;
   }
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    checkedA: false,
-    // checkedB: true,
-    checkedC: false,
-    checkedD: false,
-  });
-
-  const checkBoxHandleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
-  };
+  const checkList = {
+    Chicken: false,
+    Mutton: true,
+    Fish: false,
+    Egg: false,
+  }
 
   const [value, setValue] = React.useState('female');
 
@@ -96,7 +97,13 @@ export default () => {
             confPassword: '',
             dob: new Date(),
             startDate: new Date(),
-            endDate: new Date()
+            endDate: new Date(),
+            favItem: {
+              Chicken: false,
+              Mutton: true,
+              Fish: false,
+              Egg: false,
+            },
           }}
           validationSchema={SignUpSchema}
           onSubmit={async (values, action) => {
@@ -202,35 +209,17 @@ export default () => {
                   onBlur={handleBlur}
                 // disabled={values.startDate== undefined}
                 />
-                <FormLabel component="legend">I Like</FormLabel>
-                <FormGroup row
-                  margin="normal"
-                >
-                  <FormControlLabel
-                    control={
-                      <Checkbox checked={state.checkedA} onChange={checkBoxHandleChange('checkedA')} color="primary" />
-                    }
-                    label="Chicken"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox checked={state.checkedB} onChange={checkBoxHandleChange('checkedB')} color="primary" />
-                    }
-                    label="Mutton"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox checked={state.checkedC} onChange={checkBoxHandleChange('checkedC')} color="primary" />
-                    }
-                    label="Fish"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox checked={state.checkedD} onChange={checkBoxHandleChange('checkedD')} color="primary" />
-                    }
-                    label="Crabs"
-                  />
-                </FormGroup>
+                <Field
+                  id="favItem"
+                  name="favItem"
+                  variant="outlined"
+                  setFieldValue={setFieldValue}
+                  className={classes.margin}
+                  touched={touched}
+                  component={checkBox}
+                  onBlur={handleBlur}
+                  value={values.favItem}
+                />
                 <FormLabel component="legend">Gender</FormLabel>
                 <RadioGroup aria-label="position" name="position"
                   value={value} onChange={handleRadioChange} row
@@ -259,7 +248,7 @@ export default () => {
                 <Autocomplete
                   id="country-select-demo"
                   margin="normal"
-                  fullWidth
+                  // fullWidth
                   options={countries}
                   classes={{
                     option: classes.option,
@@ -277,7 +266,7 @@ export default () => {
                       {...params}
                       label="Choose a country"
                       variant="outlined"
-                      fullWidth
+                      // fullWidth
                       inputProps={{
                         ...params.inputProps,
                         autoComplete: 'disabled', // disable autocomplete and autofill
@@ -289,7 +278,7 @@ export default () => {
                   multiple
                   id="tags-outlined"
                   margin="normal"
-                  fullWidth
+                  // fullWidth
                   options={top100Films}
                   getOptionLabel={option => option.title}
                   // defaultValue={[top100Films[13]]}
@@ -306,7 +295,7 @@ export default () => {
                 />
                 <Button
                   type="submit"
-                  fullWidth
+                  // fullWidth
                   variant="contained"
                   color="primary"
                   className={classes.submit}
