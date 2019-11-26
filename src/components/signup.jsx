@@ -22,6 +22,7 @@ import DateField from './Reusable/DataField';
 //Schema
 import Schema from '../Schemas';
 import checkBox from './Reusable/checkBox';
+import RadioButton from './Reusable/RadioButton';
 const SignUpSchema = new Schema().getSchema();
 
 
@@ -65,12 +66,6 @@ export default () => {
       : isoCode;
   }
   const classes = useStyles();
-  const checkList = {
-    Chicken: false,
-    Mutton: true,
-    Fish: false,
-    Egg: false,
-  }
 
   const [value, setValue] = React.useState('female');
 
@@ -103,7 +98,9 @@ export default () => {
               Mutton: true,
               Fish: false,
               Egg: false,
+              Crab: false
             },
+            gender: 'female'
           }}
           validationSchema={SignUpSchema}
           onSubmit={async (values, action) => {
@@ -215,12 +212,19 @@ export default () => {
                   variant="outlined"
                   setFieldValue={setFieldValue}
                   className={classes.margin}
-                  // touched={touched}
                   component={checkBox}
-                  // onBlur={handleBlur}
                   value={values.favItem}
                 />
-                <FormLabel component="legend">Gender</FormLabel>
+                <Field
+                  id="gender"
+                  name="gender"
+                  variant="outlined"
+                  // setFieldValue={setFieldValue}
+                  className={classes.margin}
+                  component={RadioButton}
+                  value={values.gender}
+                />
+                {/* <FormLabel component="legend">Gender</FormLabel>
                 <RadioGroup aria-label="position" name="position"
                   value={value} onChange={handleRadioChange} row
                   margin="normal"
@@ -244,7 +248,7 @@ export default () => {
                     label="Other"
                     labelPlacement="end"
                   />
-                </RadioGroup>
+                </RadioGroup> */}
                 <Autocomplete
                   id="country-select-demo"
                   margin="normal"
