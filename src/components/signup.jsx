@@ -215,9 +215,9 @@ export default () => {
                   variant="outlined"
                   setFieldValue={setFieldValue}
                   className={classes.margin}
-                  touched={touched}
+                  // touched={touched}
                   component={checkBox}
-                  onBlur={handleBlur}
+                  // onBlur={handleBlur}
                   value={values.favItem}
                 />
                 <FormLabel component="legend">Gender</FormLabel>
